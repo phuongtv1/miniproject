@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <Header />
-    <Products />
+    <ProductsListContainer />
     <Footer />
   </div>
 </template>
@@ -10,14 +10,14 @@
 // @ is an alias to /src
 import Header from "@/components/Header/Header.vue";
 import Footer from "@/components/Footer/Footer.vue";
-import Products from "@/components/Product/Products.vue";
+import ProductsListContainer from "@/components/Product/ProductsListContainer.vue";
 
 export default {
   name: "Home",
   components: {
     Header,
     Footer,
-    Products
+    ProductsListContainer,
   },
 };
 </script>
