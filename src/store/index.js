@@ -19,17 +19,17 @@ export default new Vuex.Store({
         isAddedBtn: false,
         isFavourite: false,
         quantity: 10,
-        image: "img1",
+        image: "img2",
         listProductDetail: [
           {
             image: "blueImg1",
             quantity: 10,
-            textColor: "Hộp màu xanh",
+            textColor: "Màu xanh",
           },
           {
-            image: "redImg1",
+            image: "blackImg1",
             quantity: 0,
-            textColor: "Hộp màu đỏ",
+            textColor: "Màu đen",
           },
         ],
       },
@@ -51,12 +51,12 @@ export default new Vuex.Store({
           {
             image: "blueImg1",
             quantity: 10,
-            textColor: "Hộp màu xanh",
+            textColor: "Màu xanh",
           },
           {
-            image: "redImg1",
+            image: "blackImg1",
             quantity: 5,
-            textColor: "Hộp màu đỏ",
+            textColor: "Màu đen",
           },
         ],
       },
@@ -73,17 +73,17 @@ export default new Vuex.Store({
         isAddedBtn: false,
         isFavourite: false,
         quantity: 10,
-        image: "img1",
+        image: "img2",
         listProductDetail: [
           {
             image: "blueImg1",
             quantity: 0,
-            textColor: "Hộp màu xanh",
+            textColor: "Màu xanh",
           },
           {
-            image: "redImg1",
+            image: "blackImg1",
             quantity: 5,
-            textColor: "Hộp màu đỏ",
+            textColor: "Màu đen",
           },
         ],
       },
@@ -105,12 +105,12 @@ export default new Vuex.Store({
           {
             image: "blueImg1",
             quantity: 10,
-            textColor: "Hộp màu xanh",
+            textColor: "Màu xanh",
           },
           {
-            image: "redImg1",
+            image: "blackImg1",
             quantity: 5,
-            textColor: "Hộp màu đỏ",
+            textColor: "Màu đen",
           },
         ],
       },
@@ -127,17 +127,17 @@ export default new Vuex.Store({
         isAddedBtn: false,
         isFavourite: false,
         quantity: 15,
-        image: "img1",
+        image: "img2",
         listProductDetail: [
           {
             image: "blueImg1",
             quantity: 10,
-            textColor: "Hộp màu xanh",
+            textColor: "Màu xanh",
           },
           {
-            image: "redImg1",
+            image: "blackImg1",
             quantity: 5,
-            textColor: "Hộp màu đỏ",
+            textColor: "Màu đen",
           },
         ],
       },
@@ -159,12 +159,12 @@ export default new Vuex.Store({
           {
             image: "blueImg1",
             quantity: 10,
-            textColor: "Hộp màu xanh",
+            textColor: "Màu xanh",
           },
           {
-            image: "redImg1",
+            image: "blackImg1",
             quantity: 5,
-            textColor: "Hộp màu đỏ",
+            textColor: "Màu đen",
           },
         ],
       },
@@ -181,17 +181,17 @@ export default new Vuex.Store({
         isAddedBtn: false,
         isFavourite: false,
         quantity: 15,
-        image: "img1",
+        image: "img2",
         listProductDetail: [
           {
             image: "blueImg1",
             quantity: 10,
-            textColor: "Hộp màu xanh",
+            textColor: "Màu xanh",
           },
           {
-            image: "redImg1",
+            image: "blackImg1",
             quantity: 5,
-            textColor: "Hộp màu đỏ",
+            textColor: "Màu đen",
           },
         ],
       },
@@ -213,12 +213,12 @@ export default new Vuex.Store({
           {
             image: "blueImg1",
             quantity: 10,
-            textColor: "Hộp màu xanh",
+            textColor: "Màu xanh",
           },
           {
-            image: "redImg1",
+            image: "blackImg1",
             quantity: 5,
-            textColor: "Hộp màu đỏ",
+            textColor: "Màu đen",
           },
         ],
       },
@@ -235,17 +235,17 @@ export default new Vuex.Store({
         isAddedBtn: false,
         isFavourite: false,
         quantity: 15,
-        image: "img1",
+        image: "img2",
         listProductDetail: [
           {
             image: "blueImg1",
             quantity: 10,
-            textColor: "Hộp màu xanh",
+            textColor: "Màu xanh",
           },
           {
-            image: "redImg1",
+            image: "blackImg1",
             quantity: 5,
-            textColor: "Hộp màu đỏ",
+            textColor: "Màu đen",
           },
         ],
       },
@@ -263,7 +263,196 @@ export default new Vuex.Store({
       openCheckoutModal: false,
     },
   },
-  mutations: {},
-  actions: {},
+  getters: {
+    productsAddedToFavourite: state => {
+      return state.products.filter(el => {
+        return el.isFavourite;
+      });
+    },
+
+    isUserLoggedIn: state => {
+      return state.userInfo.isLoggedIn;
+    },
+
+    isUserSignedUp: state => {
+      return state.userInfo.isSignedUp;
+    },
+
+    getUserName: state => {
+      return state.userInfo.name;
+    },
+
+    productsAdded: (state) => {
+      return state.products.filter((el) => {
+        return el.isAddedToCart;
+      });
+    },
+
+    getProductById: (state) => (id) => {
+      return state.products.find((product) => product.id == id);
+    },
+
+    quantity: (state) => {
+      return state.products.quantity;
+    },
+
+    isLoginModalOpen: state => {
+      return state.systemInfo.openLoginModal;
+    },
+
+    isCheckoutModalOpen: state => {
+      return state.systemInfo.openCheckoutModal;
+    },
+
+    isSignupModalOpen: state => {
+        return state.systemInfo.openSignupModal;
+      },
+  },
+  mutations: {
+    showCheckoutModal: (state, show) => {
+      state.systemInfo.openCheckoutModal = show;
+    },
+
+    setProductToCart: (state, id) => {
+      state.products.forEach((el) => {
+        if (id === el.id) {
+          el.isAddedToCart = true;
+        }
+      });
+    },
+
+    setAddedBtn: (state, data) => {
+      state.products.forEach((el) => {
+        if (data.id === el.id) {
+          el.isAddedBtn = data.status;
+        }
+      });
+    },
+
+    removeFromCart: (state, id) => {
+      state.products.forEach((el) => {
+        if (id === el.id) {
+          el.isAddedToCart = false;
+        }
+      });
+    },
+
+    setHasUserSearched: (state, hasSearched) => {
+      state.userInfo.hasSearched = hasSearched;
+    },
+
+    setUserName: (state, name) => {
+      state.userInfo.name = name;
+    },
+
+    setProductTitleSearched: (state, titleSearched) => {
+      state.userInfo.productTitleSearched = titleSearched;
+    },
+
+    setQuantity: (state, data) => {
+      state.products.forEach((el) => {
+        if (data.id === el.id) {
+          el.quantity = data.quantity;
+        }
+      });
+    },
+
+    setToFavourite: (state, id) => {
+      state.products.forEach((el) => {
+        if (id === el.id) {
+          el.isFavourite = true;
+        }
+      });
+    },
+    deleteFromFavourite: (state, id) => {
+      state.products.forEach((el) => {
+        if (id === el.id) {
+          el.isFavourite = false;
+        }
+      });
+    },
+
+    setLoginModal: (state, show) => {
+      state.systemInfo.openLoginModal = show;
+    },
+
+    setSignUpModal: (state, show) => {
+      state.systemInfo.openSignupModal = show;
+    },
+
+    isUserLoggedInStatus: (state, isUserLoggedIn) => {
+      state.userInfo.isLoggedIn = isUserLoggedIn;
+    },
+
+    isUserSignedUpStatus: (state, isSignedUp) => {
+      state.userInfo.isSignedUp = isSignedUp;
+    },
+
+    removeProductsFromFavourite: state => {
+      state.products.filter(el => {
+        el.isFavourite = false;
+      });
+    },
+
+    removeFromFavourite: (state, id) => {
+      state.products.forEach(el => {
+        if (id === el.id) {
+          el.isFavourite = false;
+        }
+      });
+    },
+
+    SET_USER(state, authUser) {
+      state.authUser = authUser
+    }
+  },
+
+  actions: {
+
+    checkIsUserLoggedIn: ({ commit }, payload) => {
+      commit("isUserLoggedInStatus", payload);
+    },
+
+    checkIsUserSignedUpStatus: ({ commit }, payload) => {
+      commit("isUserSignedUpStatus", payload);
+    },
+
+    showLoginModal: ({ commit }, payload) => {
+      commit("setLoginModal", payload);
+    },
+
+    showSignupModal: ({ commit }, payload) => {
+      commit("setSignUpModal", payload);
+    },
+
+    addToFavourite({ commit }, payload) {
+      commit("setToFavourite", payload);
+    },
+
+    removeProductToFavourite({ commit }, payload) {
+      commit("deleteFromFavourite", payload);
+    },
+
+    changeQuantity({ commit }, payload) {
+      commit("setQuantity", payload);
+    },
+
+    changeAddedBtn({ commit }, payload) {
+      commit("setAddedBtn", payload);
+    },
+
+    addProductToCart({ commit }, payload) {
+      commit("setProductToCart", payload);
+    },
+
+    getHasUserSearched({ commit }, payload) {
+      commit("setHasUserSearched", payload);
+    },
+
+    getProductTitleSearched({ commit }, payload) {
+      commit("setProductTitleSearched", payload, { root: true });
+    },
+
+  },
   modules: {},
 });
