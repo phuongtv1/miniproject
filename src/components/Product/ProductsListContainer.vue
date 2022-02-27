@@ -2,7 +2,7 @@
   <div class="columns is-centered is-multiline">
     <div
       class="card column is-one-quarter"
-      v-for="product in products"
+      v-for="product in getProducts"
       :key="product.id"
     >
       <Products :product="product" />
@@ -14,8 +14,9 @@
 </template>
 
 <script>
-import Products from "@/components/Product/Products.vue";
 import { mapState } from "vuex";
+import { getByTitle } from "@/mixins/filters.js";
+import Products from "@/components/Product/Products.vue";
 
 export default {
   name: "ProducstList",
@@ -23,13 +24,33 @@ export default {
     return {
       id: "",
       noProductLable: "No product found",
+      productsFiltered: [],
     };
   },
 
   computed: {
-    ...mapState(["products"]),
+    ...mapState(['products', 'userInfo']),
+
+    getProducts() {
+      if (this.userInfo.hasSearched) {
+        return this.getProductByTitle();
+      } else {
+        return this.products;
+      }
+    },
   },
 
+  methods: {
+    getProductByTitle() {
+      let listOfProducts = this.products,
+          titleSearched = this.userInfo.productTitleSearched;
+
+      return (this.productsFiltered = getByTitle(
+        listOfProducts,
+        titleSearched
+      ));
+    },
+  },
   components: {
     Products,
   },
